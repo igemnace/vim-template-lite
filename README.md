@@ -2,30 +2,44 @@
 
 A tiny Vim plugin for loading template files.
 
-## Configuration
+## Installation
 
-- `g:templates_dir` (default: `$HOME/.vim/skeletons`)
+Copy `plugin/template-lite.vim` to `~/.vim/plugin/template-lite.vim` on
+UNIX-like systems, or install with your favorite plugin manager.
 
-The directory in which vim-template-lite will look for your templates.
+## Usage
 
-- `g:templates_autoload` (default: 1)
+Put your template files into your templates directory (`$HOME/.vim/templates` by
+default). The filenames and subdirectory names can be whatever you want.
 
-Governs whether vim-template-lite will enable automatic template loading (1 to
-enable, 0 to disable).
-
-- `g:templates_mappings` (default: `{}`)
-
-A Dictionary mapping filename patterns to the template filename to be
-automatically loaded for them.
-
-Example:
+To load your templates automatically, add an entry to
+`g:template_lite_mappings`. To illustrate by example:
 
 If I have a template for a Javascript unit test and I put it in
-`~/.vim/skeletons/javascript/template.test.js`, I'd have the following line in
+`~/.vim/templates/javascript/template.test.js`, I'd have the following line in
 my `.vimrc`:
 
 ```vim
-let g:templates_mappings = { '*.test.js': 'javascript/template.test.js' }
+let g:template_lite_mappings = { '*.test.js': 'javascript/template.test.js' }
+```
+
+This will load my template for all files whose filename matches `*.test.js`.
+
+You can as many entries as necessary, as long as you follow the `pattern:
+template_path` format. For example, my `.vimrc` has the following lines:
+
+```vim
+let g:template_lite_mappings = {
+  \  '*.component.js': 'react-native/component.js',
+  \  '*.hoc.js': 'react-native/hoc.js',
+  \  '*.styles.js': 'react-native/styles.js',
+  \  '*.redux.js': 'react-native/redux.js',
+  \  '*.fire.js': 'react-native/fire.js',
+  \  '*.component.jsx': 'react/component.jsx',
+  \  '*.hoc.jsx': 'react/hoc.jsx',
+  \  '*.component.ts': 'angular/component.ts',
+  \  '*.sh': 'sh.sh',
+  \}
 ```
 
 ## Other Usage
@@ -53,8 +67,25 @@ autocmd User TemplateLoad execute "%s/{{filename}}/" . expand("%:t:r") . "/g"
 ```
 
 This will replace all instances of `{{filename}}` in the template with the
-current filename. You can even use [Tim Pope's abolish.vim](https://github.com/tpope/tpope-vim-abolish) plugin
-to make the replacement case-aware.
+current filename. You can even use [Tim Pope's
+abolish.vim](https://github.com/tpope/tpope-vim-abolish) plugin to make the
+replacement case-aware.
+
+## Configuration
+
+- `g:template_lite_dir` (default: `$HOME/.vim/templates`)
+
+The directory in which vim-template-lite will look for your templates.
+
+- `g:template_lite_autoload` (default: 1)
+
+Governs whether vim-template-lite will enable automatic template loading (1 to
+enable, 0 to disable).
+
+- `g:template_lite_mappings` (default: `{}`)
+
+A Dictionary mapping filename patterns to the template filename to be
+automatically loaded for them.
 
 ## Tiny Vim Plugins
 

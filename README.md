@@ -67,9 +67,13 @@ autocmd User TemplateLoad execute "%s/{{filename}}/" . expand("%:t:r") . "/g"
 ```
 
 This will replace all instances of `{{filename}}` in the template with the
-current filename. You can even use [Tim Pope's
+current filename.
+
+An advantage of this open-ended approach is that you can use other, more
+powerful plugins for this! For example, I use [Tim Pope's
 abolish.vim](https://github.com/tpope/tpope-vim-abolish) plugin to make the
-replacement case-aware.
+replacement case-aware. Check out [my example on
+Gist](https://gist.github.com/igemnace/81b17db53341571f473d2b1e6490b3e7).
 
 ## Configuration
 

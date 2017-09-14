@@ -1,6 +1,6 @@
 """ DECLARATIONS {{{
 " guard against multiple loaded instances
-if exists("g:loaded_template_lite")
+if exists('g:loaded_template_lite')
   finish
 endif
 
@@ -9,19 +9,19 @@ let g:loaded_template_lite=1
 
 " define default templates directory
 " default: $HOME/.vim/skeletons
-if !exists("g:template_lite_dir")
-  let g:template_lite_dir=$HOME."/.vim/templates"
+if !exists('g:template_lite_dir')
+  let g:template_lite_dir=$HOME.'/.vim/templates'
 endif
 
 " define default autoload behavior
 " default: on
-if !exists("g:template_lite_autoload")
+if !exists('g:template_lite_autoload')
   let g:template_lite_autoload=1
 endif
 
 " define default template mappings
 " default: empty dict
-if !exists("g:template_lite_mappings")
+if !exists('g:template_lite_mappings')
   let g:template_lite_mappings={}
 endif
 """ END DECLARATIONS }}}
@@ -29,7 +29,7 @@ endif
 """ FUNCTIONS {{{
 " returns the load command for a template
 function! s:LoadCmd(template)
-  return "0r " . g:template_lite_dir . "/" . a:template
+  return '0r ' . g:template_lite_dir . '/' . a:template
 endfunction
 
 " executes the load command from s:LoadCmd()
@@ -42,7 +42,7 @@ endfunction
 
 " attaches the load command from s:LoadCmd() to an autocmd
 function! s:AttachAutocmd(pattern, template)
-  execute "autocmd BufNewFile" a:pattern
+  execute 'autocmd BufNewFile' a:pattern
     \ "call s:LoadTemplate('" . a:template . "')"
 endfunction
 
@@ -53,8 +53,8 @@ function! s:EnableTemplates()
   augroup TemplateLoading
     autocmd!
 
-    for [pattern, template] in items(g:template_lite_mappings)
-      call s:AttachAutocmd(pattern, template)
+    for [l:pattern, l:template] in items(g:template_lite_mappings)
+      call s:AttachAutocmd(l:pattern, l:template)
     endfor
   augroup END
 endfunction
@@ -68,7 +68,7 @@ endfunction
 
 " toggles s:EnableTemplates() and s:DisableTemplates()
 function! s:ToggleTemplates()
-  if exists("s:templates_enabled") && s:templates_enabled
+  if exists('s:templates_enabled') && s:templates_enabled
     call s:DisableTemplates()
   else
     call s:EnableTemplates()
@@ -83,10 +83,10 @@ endfunction
 
 " returns tab-completion candidates for template filenames
 function! s:CompleteTemplates(ArgLead, CmdLine, CursorPos)
-  let l:path_list=globpath(g:template_lite_dir, a:ArgLead . "**", 0, 1)
-  let l:files_path_list=filter(l:path_list, "!isdirectory(v:val)")
+  let l:path_list=globpath(g:template_lite_dir, a:ArgLead . '**', 0, 1)
+  let l:files_path_list=filter(l:path_list, '!isdirectory(v:val)')
   let l:relative_path_list=map(l:files_path_list,
-    \ function("s:ShortenTemplateFilename"))
+    \ function('s:ShortenTemplateFilename'))
 
   return l:relative_path_list
 endfunction

@@ -29,7 +29,7 @@ endif
 """ FUNCTIONS {{{
 " returns the load command for a template
 function! s:LoadCmd(template)
-  return '0r ' . g:template_lite_dir . '/' . a:template
+  return 'keepalt 0r ' . g:template_lite_dir . '/' . a:template
 endfunction
 
 " executes the load command from s:LoadCmd()

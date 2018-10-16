@@ -4,8 +4,8 @@ A tiny Vim plugin for loading template files.
 
 ## Installation
 
-Copy `plugin/template-lite.vim` to `~/.vim/plugin/template-lite.vim` on
-UNIX-like systems, or install with your favorite plugin manager.
+Copy the contents of `plugin` and `autoload` to `~/.vim` on UNIX-like systems,
+or install with your favorite plugin manager.
 
 ## Usage
 

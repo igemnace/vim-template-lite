@@ -27,8 +27,8 @@ endfunction
 command! EnableTemplates call template_lite#enable()
 command! DisableTemplates call template_lite#disable()
 command! ToggleTemplates call template_lite#toggle_enable()
-command! -nargs=1 -complete=customlist,s:CompleteTemplates LoadTemplate
-      \ call template_lite#load(<f-args>)
+command! -nargs=1 -range=0 -complete=customlist,s:CompleteTemplates LoadTemplate
+      \ call template_lite#load(<f-args>, <count>)
 
 " enable template loading if autoload is turned on
 if g:template_lite_autoload

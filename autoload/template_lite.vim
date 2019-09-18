@@ -1,6 +1,8 @@
-function! template_lite#load(template) abort
+function! template_lite#load(template, ...) abort
+  " allow passing range as optional second arg
+  let l:range = a:0 == 1 ? a:1 : '0'
   let l:template_path = g:template_lite_dir . '/' . a:template
-  execute 'keepalt 0r' l:template_path
+  execute 'keepalt' l:range . 'r' l:template_path
 
   " trigger a custom autocmd, to allow arbitrary scripts to run
   doautocmd User TemplateLoad
